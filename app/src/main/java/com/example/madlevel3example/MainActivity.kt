@@ -28,6 +28,8 @@ class MainActivity : AppCompatActivity() {
                 R.id.action_remindersFragment_to_addReminderFragment
             )
         }
+
+        fabToggler()
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -45,4 +47,16 @@ class MainActivity : AppCompatActivity() {
             else -> super.onOptionsItemSelected(item)
         }
     }
+
+    // hide the fab (button) when the navcontroller navigated to the add reminder fragment
+    private fun fabToggler() {
+        navController.addOnDestinationChangedListener { _,       destination, _ ->
+            if (destination.id in arrayOf(R.id.addReminderFragment)) {
+                fab.hide()
+            } else {
+                fab.show()
+            }
+        }
+    }
+
 }
